@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import './Comment.css'
 
@@ -10,18 +11,7 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
     }
 
     const findCommentParent = (id, comments) => {
-        for (let i = 0; i < comments?.length; i++) {
-            if (comments[i]?.id === id) {
-                return comments[i];
-            }
-            if (comments[i]?.replies) {
-                const foundComment = findCommentParent(id, comments[i]?.replies);
-                if (foundComment) {
-                    return foundComment;
-                }
-            }
-        }
-        return null;
+        return comments.find(comment => comment.id === id || (comment.replies && findCommentParent(id, comment.replies)));
     }
 
     const handleSubmit = (e) => {
@@ -44,7 +34,18 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
     };
 
     return (
-        <section className='fcc-contenedor fcc-flex'>
+        <motion.section
+            className='fcc-contenedor fcc-flex'
+            initial={{ x: "100%" }}
+            animate={{
+                x: 0,
+                backgroundColor: "#fff",
+                transition: '1s',
+                transitionEnd: {
+                    transition: '1s',
+                },
+            }}
+        >
             <img className='ic-logo-img' src="https://unavatar.io/GonzaloArray" alt="Icono" />
             <form className="fcc-form" onSubmit={handleSubmit}>
                 <textarea
@@ -58,6 +59,6 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
                 </textarea>
                 <input className='fcc-submit' type="submit" value={'SEND'} />
             </form>
-        </section>
+        </motion.section>
     )
 }

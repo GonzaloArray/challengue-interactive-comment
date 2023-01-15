@@ -8,6 +8,7 @@ import editIcon from '../../assets/images/icon-edit.svg';
 
 import './Comment.css'
 import { FormEdit } from '../Form/FormEdit';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export const CommentReponse = ({ name, date, img, comment, id, array, setArray, replies }) => {
 
@@ -44,91 +45,103 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
         <>
             <div className='cr-flex cr-contenedor-response'>
                 <div className='cr-line'></div>
-                <article  
-                    className='ic-bg ic-flex ic-config-child-flex ic-closed'
-                >
-                    <aside className='ics-flex ics-aside'>
-                        <ButtonFollow follow={follow} setFollow={setFollow}>
-                            +
-                        </ButtonFollow>
-                        <p className='ics-state'>{follow}</p>
-                        <ButtonFollow follow={follow} setFollow={setFollow}>
-                            -
-                        </ButtonFollow>
-                    </aside>
-                    <div className='ic-width'>
-                        <header className="ic-header">
-                            <div className='ic-flex'>
-                                <img className='ic-logo-img' src={img} alt="Icono" />
-                                <h2 className='ic-title'>{name}</h2>
+                <AnimatePresence >
+                    <motion.article
+                        className='ic-bg ic-flex ic-config-child-flex ic-closed'
+                        initial={{
+                            opacity: 0,
+                            y: '-100%'
+                        }}
+                        transition={{delay: .1, type: 'spring', stiffness: 100}}
+                        animate={{
+                            opacity: [0, .5, 1],
+                            y: 0
+                        }}
+                        exit={{ opacity: 0, transition: 1 }}
+                    >
+                        <aside className='ics-flex ics-aside'>
+                            <ButtonFollow follow={follow} setFollow={setFollow}>
+                                +
+                            </ButtonFollow>
+                            <p className='ics-state'>{follow}</p>
+                            <ButtonFollow follow={follow} setFollow={setFollow}>
+                                -
+                            </ButtonFollow>
+                        </aside>
+                        <div className='ic-width'>
+                            <header className="ic-header">
+                                <div className='ic-flex'>
+                                    <img className='ic-logo-img' src={img} alt="Icono" />
+                                    <h2 className='ic-title'>{name}</h2>
+                                    {
+                                        name == '@GonzaloArray' &&
+                                        (<p className='ic-you'>You</p>)
+                                    }
+                                    <p className='ic-descrip'>{date}</p>
+                                </div>
                                 {
-                                    name == '@GonzaloArray' &&
-                                    (<p className='ic-you'>You</p>)
-                                }
-                                <p className='ic-descrip'>{date}</p>
-                            </div>
-                            {
-                                name == '@GonzaloArray' ?
-                                    (
-                                        <div className='ic-you-flex'>
-                                            <button type='button' onClick={handleDelete} className='ic-you-flex ic-you-font ic-you-delete'>
-                                                <img src={deleteIcon} alt="Imagen Reply" />
-                                                <p>Delete</p>
-                                            </button>
-                                            <button type='button' onClick={handleEdit} className='ic-you-flex ic-you-font ic-you-edit'>
-                                                <img src={editIcon} alt="Imagen Reply" />
-                                                <p>Edit</p>
-                                            </button>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        <button type='button' className='ic-button' onClick={handleReply}>
-                                            <img src={svgImg} alt="Imagen Reply" />
-                                            <p>Reply</p>
-                                        </button>
-                                    )
-                            }
-                        </header>
-                        <main className='icm-main icm-top-2'>
-                            {
-                                edit ?
-                                    (
-                                        <FormEdit setEdit={setEdit} array={array} setArray={setArray} comment={comment} replies={replies} id={id}/>
-                                    )
+                                    name == '@GonzaloArray' ?
+                                        (
+                                            <div className='ic-you-flex'>
+                                                <button type='button' onClick={handleDelete} className='ic-you-flex ic-you-font ic-you-delete'>
+                                                    <img src={deleteIcon} alt="Imagen Reply" />
+                                                    <p>Delete</p>
+                                                </button>
+                                                <button type='button' onClick={handleEdit} className='ic-you-flex ic-you-font ic-you-edit'>
+                                                    <img src={editIcon} alt="Imagen Reply" />
+                                                    <p>Edit</p>
+                                                </button>
+                                            </div>
+                                        )
                                         :
-                                    (
-                                        <p className = 'icm-title'><span style = {{ color: 'blue', cursor: 'pointer' }}>{comment?.split(' ')[0].includes('@') && comment?.split(' ')[0]}</span> {comment?.split(' ').slice(1).join(' ')}</p>
-                                    )
-                            }
+                                        (
+                                            <button type='button' className='ic-button' onClick={handleReply}>
+                                                <img src={svgImg} alt="Imagen Reply" />
+                                                <p>Reply</p>
+                                            </button>
+                                        )
+                                }
+                            </header>
+                            <main className='icm-main icm-top-2'>
+                                {
+                                    edit ?
+                                        (
+                                            <FormEdit setEdit={setEdit} array={array} setArray={setArray} comment={comment} replies={replies} id={id} />
+                                        )
+                                        :
+                                        (
+                                            <p className='icm-title'><span style={{ color: 'blue', cursor: 'pointer' }}>{comment?.split(' ')[0].includes('@') && comment?.split(' ')[0]}</span> {comment?.split(' ').slice(1).join(' ')}</p>
+                                        )
+                                }
 
-                </main>
+                            </main>
+                        </div>
+                        <button className='icm-button' onClick={handleShowComment}>
+                            <p>Show comment {replies?.length}</p>
+                        </button>
+                    </motion.article>
+                </AnimatePresence>
             </div>
-            <button className='icm-button' onClick={handleShowComment}>
-                <p>Show comment {replies?.length}</p>
-            </button>
-        </article>
-            </div >
-{
-    showComment &&
-    (replies.map(reply => (
-        <div className='cr-edit'>
-            <CommentReponse key={reply?.id} date={reply?.date} name={reply?.name} img={reply?.img} comment={reply.comment} replies={reply?.replies} id={reply?.id} array={array} setArray={setArray} />
-        </div>
-    )))
+            {
+                showComment &&
+                (replies.map(reply => (
+                    <div className='cr-edit'>
+                        <CommentReponse key={reply?.id} date={reply?.date} name={reply?.name} img={reply?.img} comment={reply.comment} replies={reply?.replies} id={reply?.id} array={array} setArray={setArray} />
+                    </div>
+                )))
             }
-{
-    reply &&
-        (
-            <div className='cr-flex cr-mt-1'>
-                <div className='cr-line'></div>
+            {
+                reply &&
+                (
+                    <div className='cr-flex cr-mt-1'>
+                        <div className='cr-line'></div>
 
-                <div className='cr-contenedor-response ic-flex ic-config-child-flex'>
-                    <CommentChild name={'@' + name} id={id} array={array} setArray={setArray} setReply={setReply} />
-                </div>
-            </div>
-        )
-}
+                        <div className='cr-contenedor-response ic-flex ic-config-child-flex'>
+                            <CommentChild name={'@' + name} id={id} array={array} setArray={setArray} setReply={setReply} />
+                        </div>
+                    </div>
+                )
+            }
 
         </>
     )
