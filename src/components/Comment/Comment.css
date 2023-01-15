@@ -4,6 +4,11 @@ h1, h2, h3, h4{
 p{
     color: rgb(80, 80, 80);
 }
+.container{
+    max-width: min(100% - 15px, 650px);
+    margin-inline: auto;
+    overflow-x: hidden;
+}
 /* Aside */
 .ics-flex{
     display: flex;
@@ -17,18 +22,22 @@ p{
 /* Header */
 .ic-all-flex{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
     gap: .4rem;
 }
+.ic-bg{
+    background-color: #fffffff9;
+    border-radius: .7rem;
+    padding: .7rem 1rem;
+}
 .ic-contenedor{
-    max-width: min(100% - 15px, 600px);
-    width: 500px;
     background-color: #fffffff9;
     padding: .9rem 1rem;
     border-radius: .7rem;
 }
+
 .ic-header{
     display: flex;
     align-items: center;
@@ -144,8 +153,6 @@ p{
 
 /* Form */
 .fcc-contenedor{
-    max-width: min(100% - 15px, 600px);
-    width: 100%;
     background-color: #fffffff9;
     border-radius: .7rem;
     padding: 1rem 1rem;
@@ -153,6 +160,7 @@ p{
 .fcc-flex{
     display: flex;
     align-items: flex-start;
+    width: 100%;
     gap: 1rem;
 }
 .fcc-form{
@@ -193,6 +201,7 @@ p{
 .cr-flex{
     display: flex;
     width: 100%;
+    flex: 1;
     gap: .5px;
 }
 .cr-line{
@@ -207,13 +216,6 @@ p{
     width: .1rem;
     background-color: rgb(0, 208, 255);
 
-}
-.cr-contenedor-response{
-    max-width: min(100% - 15px, 600px);
-    width: 100%;
-    background-color: #fffffff9;
-    padding: .9rem 1rem;
-    border-radius: .7rem;
 }
 .cr-form{
     width: 100%;

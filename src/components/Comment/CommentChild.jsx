@@ -10,12 +10,12 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
     }
 
     const findCommentParent = (id, comments) => {
-        for (let i = 0; i < comments.length; i++) {
-            if (comments[i].id === id) {
+        for (let i = 0; i < comments?.length; i++) {
+            if (comments[i]?.id === id) {
                 return comments[i];
             }
-            if (comments[i].replies) {
-                const foundComment = findCommentParent(id, comments[i].replies);
+            if (comments[i]?.replies) {
+                const foundComment = findCommentParent(id, comments[i]?.replies);
                 if (foundComment) {
                     return foundComment;
                 }
@@ -29,7 +29,7 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
 
         const parentComment = findCommentParent(id, array);
 
-        parentComment.replies = [...parentComment.replies, {
+        parentComment.replies = [...parentComment?.replies, {
             name: '@GonzaloArray',
             img: 'https://unavatar.io/GonzaloArray',
             date: 'comment', replies: [],

@@ -4,7 +4,7 @@ function App() {
 
     return (
         <>
-            <main className="ic-flex">
+            <main className="ic-flex container">
                 <InteractiveComments />                
             </main>
         </>

@@ -4,7 +4,7 @@ import { Comment } from '../Comment/Comment'
 import './InteractiveComment.css'
 
 export const InteractiveComments = () => {
-    
+
     const [array, setArray] = useState([
         {
             name: 'GonzaloArray',
@@ -12,7 +12,16 @@ export const InteractiveComments = () => {
             date: '1 month ago',
             comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
             id: '123123fasdfeq123123qdfdsf',
-            replies: []
+            replies: [
+                {
+                    name: 'Anuel',
+                    img: 'https://unavatar.io/anuel',
+                    date: '5 weeks ago',
+                    comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
+                    id: 'asdfasdf2312312ddsafasdftghtujuik',
+                    replies: []
+                }
+            ]
         },
         {
             name: 'Ozuna',
@@ -29,12 +38,12 @@ export const InteractiveComments = () => {
 
             {
                 array.map(comment => (
-                    <Comment 
-                        key={comment.id} 
+                    <Comment
+                        key={comment.id}
                         date={comment.date}
-                        name={comment.name} 
-                        img={comment.img} 
-                        comment={comment.comment} 
+                        name={comment.name}
+                        img={comment.img}
+                        comment={comment.comment}
                         replies={comment.replies}
                         id={comment.id}
                         array={array}
@@ -43,7 +52,7 @@ export const InteractiveComments = () => {
                 ))
             }
 
-            <AddCommentParent name={'@GonzaloArray '} array={array} setArray={setArray}/>
+            <AddCommentParent name={'@GonzaloArray '} array={array} setArray={setArray} />
         </section>
     )
 }

@@ -28,7 +28,7 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
         const filterArray = array.map(comment => {
             return {
                 ...comment,
-                replies: comment.replies.filter(reply => reply.id !== id)
+                replies: comment.replies.filter(reply => reply?.id !== id)
             }
         })
 
@@ -42,9 +42,11 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
 
     return (
         <>
-            <div className='cr-flex'>
+            <div className='cr-flex cr-contenedor-response'>
                 <div className='cr-line'></div>
-                <article className='cr-contenedor-response ic-flex ic-config-child-flex ic-closed'>
+                <article  
+                    className='ic-bg ic-flex ic-config-child-flex ic-closed'
+                >
                     <aside className='ics-flex ics-aside'>
                         <ButtonFollow follow={follow} setFollow={setFollow}>
                             +
@@ -96,14 +98,14 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
                                     )
                                         :
                                     (
-                                        <p className = 'icm-title'><span style = {{ color: 'blue', cursor: 'pointer' }}>{comment.split(' ')[0].includes('@') && comment.split(' ')[0]}</span> {comment.split(' ').slice(1).join('')}</p>
+                                        <p className = 'icm-title'><span style = {{ color: 'blue', cursor: 'pointer' }}>{comment?.split(' ')[0].includes('@') && comment?.split(' ')[0]}</span> {comment?.split(' ').slice(1).join(' ')}</p>
                                     )
                             }
 
                 </main>
             </div>
             <button className='icm-button' onClick={handleShowComment}>
-                <p>Show comment {replies.length}</p>
+                <p>Show comment {replies?.length}</p>
             </button>
         </article>
             </div >
@@ -111,7 +113,7 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
     showComment &&
     (replies.map(reply => (
         <div className='cr-edit'>
-            <CommentReponse key={reply.id} date={reply.date} name={reply.name} img={reply.img} comment={reply.comment} replies={reply.replies} id={reply.id} array={array} setArray={setArray} />
+            <CommentReponse key={reply?.id} date={reply?.date} name={reply?.name} img={reply?.img} comment={reply.comment} replies={reply?.replies} id={reply?.id} array={array} setArray={setArray} />
         </div>
     )))
             }

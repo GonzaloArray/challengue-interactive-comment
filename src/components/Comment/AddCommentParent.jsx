@@ -12,7 +12,7 @@ export const AddCommentParent = ({name, array, setArray}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (changeName !== '' && changeName.length > 12) {
+        if (changeName !== '' && changeName?.length > 12) {
             setArray([...array, {
                 name,
                 img: `https://unavatar.io/${name}`,

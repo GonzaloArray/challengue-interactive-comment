@@ -59,7 +59,7 @@ export const Comment = ({ name, date, img, comment, id, array, setArray, replies
             }
             {showComment &&
                 (replies.map(reply => (
-                    <CommentReponse key={reply.id} date={reply.date} name={reply.name} img={reply.img} comment={reply.comment} replies={reply.replies} id={reply.id} array={array} setArray={setArray} />
+                    <CommentReponse key={reply?.id} date={reply?.date} name={reply?.name} img={reply?.img} comment={reply?.comment} replies={reply?.replies} id={reply?.id} array={array} setArray={setArray} />
                 )))
             }
 

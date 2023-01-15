@@ -79,4 +79,5 @@ button:hover {
 
 .ic-flex {
   display: flex;
+  flex: 1;
 }
