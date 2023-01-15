@@ -5,6 +5,7 @@ import { CommentChild } from './CommentChild'
 import svgImg from '../../assets/images/icon-reply.svg'
 import deleteIcon from '../../assets/images/icon-delete.svg';
 import editIcon from '../../assets/images/icon-edit.svg';
+import responseIcon from '../../assets/images/icon-response.svg';
 
 import './Comment.css'
 import { FormEdit } from '../Form/FormEdit';
@@ -116,7 +117,13 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
 
                             </main>
                         </div>
-                        <button className='icm-button' onClick={handleShowComment}>
+                        <button className='icm-button icm-flex' onClick={handleShowComment}>
+                            <motion.img 
+                                src={responseIcon} 
+                                className='icm-icon-img'
+                                initial={{ rotate: 180}}
+                                alt="Response Icon" 
+                            />
                             <p>Show comment {replies?.length}</p>
                         </button>
                     </motion.article>

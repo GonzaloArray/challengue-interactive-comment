@@ -52,7 +52,7 @@ export const InteractiveComments = () => {
                 ))
             }
 
-            <AddCommentParent name={'@GonzaloArray '} array={array} setArray={setArray} />
+            <AddCommentParent name={'GonzaloArray'} array={array} setArray={setArray} />
         </section>
     )
 }

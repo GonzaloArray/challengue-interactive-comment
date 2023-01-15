@@ -11,8 +11,22 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
     }
 
     const findCommentParent = (id, comments) => {
-        return comments.find(comment => comment.id === id || (comment.replies && findCommentParent(id, comment.replies)));
+        for (let i = 0; i < comments.length; i++) {
+            if (comments[i].id === id) {
+                return comments[i];
+            }
+            if (comments[i].replies) {
+                const foundComment = findCommentParent(id, comments[i].replies);
+                if (foundComment) {
+                    return foundComment;
+                }
+            }
+        }
+        return null;
     }
+    /* const findCommentParent = (id, comments) => {
+        return comments.find(comment => comment.id === id || (comment.replies && findCommentParent(id, comment.replies)));
+    } */
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,13 +51,10 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
         <motion.section
             className='fcc-contenedor fcc-flex'
             initial={{ x: "100%" }}
+            transition={{delay: .1, type: 'spring', stiffness: 100}}
             animate={{
                 x: 0,
                 backgroundColor: "#fff",
-                transition: '1s',
-                transitionEnd: {
-                    transition: '1s',
-                },
             }}
         >
             <img className='ic-logo-img' src="https://unavatar.io/GonzaloArray" alt="Icono" />

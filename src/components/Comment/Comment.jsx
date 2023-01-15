@@ -6,6 +6,7 @@ import { CommentReponse } from './CommentReponse';
 import './Comment.css'
 
 import svgImg from '../../assets/images/icon-reply.svg'
+import { motion } from 'framer-motion-3d';
 
 
 export const Comment = ({ name, date, img, comment, id, array, setArray, replies }) => {
@@ -23,12 +24,29 @@ export const Comment = ({ name, date, img, comment, id, array, setArray, replies
 
     return (
         <section className='ic-all-flex'>
-            <article className='ic-contenedor ic-flex ic-closed'>
+            <motion.article 
+                className='ic-contenedor ic-flex ic-closed'
+                initial={{
+                    opacity: 0,
+                    y: '-100%'
+                }}
+                transition={{delay: .1, type: 'spring', stiffness: 100}}
+                animate={{
+                    opacity: [0, .5, 1],
+                    y: 0
+                }}
+                exit={{ opacity: 0, transition: 1 }}
+            >
                 <aside className='ics-flex ics-aside'>
                     <ButtonFollow follow={follow} setFollow={setFollow}>
                         +
                     </ButtonFollow>
-                    <p className='ics-state'>{follow}</p>
+                    <motion.p 
+                        className='ics-state'
+                        
+                    >
+                        {follow}
+                    </motion.p>
                     <ButtonFollow follow={follow} setFollow={setFollow}>
                         -
                     </ButtonFollow>
@@ -52,7 +70,7 @@ export const Comment = ({ name, date, img, comment, id, array, setArray, replies
                 <button className='icm-button' onClick={handleShowComment}>
                     <p>Show comment {replies.length}</p>
                 </button>
-            </article>
+            </motion.article>
             {
                 reply &&
                 (<CommentChild name={'@' + name} id={id} array={array} setArray={setArray} setReply={setReply} />)
