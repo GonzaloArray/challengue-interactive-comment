@@ -25,7 +25,6 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
         setShowComment(!showComment);
     }
 
-
     const handleDelete = () => {
         const filterArray = array.map(comment => {
             return {
@@ -42,6 +41,12 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
         setEdit(!edit);
     }
 
+    // Motion
+    const variants = {
+        open: { rotate: 0 },
+        closed: { rotate: 180 }
+    }
+
     return (
         <>
             <div className='cr-flex cr-contenedor-response'>
@@ -53,7 +58,7 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
                             opacity: 0,
                             y: '-100%'
                         }}
-                        transition={{delay: .1, type: 'spring', stiffness: 100}}
+                        transition={{ delay: .1, type: 'spring', stiffness: 100 }}
                         animate={{
                             opacity: [0, .5, 1],
                             y: 0
@@ -117,23 +122,31 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
 
                             </main>
                         </div>
-                        <button className='icm-button icm-flex' onClick={handleShowComment}>
-                            <motion.img 
-                                src={responseIcon} 
-                                className='icm-icon-img'
-                                initial={{ rotate: 180}}
-                                alt="Response Icon" 
-                            />
-                            <p>Show comment {replies?.length}</p>
-                        </button>
+                        {
+                            replies?.length > 0 &&
+                                (
+                                    <button className='icm-button icm-flex' onClick={handleShowComment}>
+                                        <motion.img
+                                            src={responseIcon}
+                                            className='icm-icon-img'
+                                            variants={variants}
+                                            initial={{ rotate: 180 }}
+                                            animate={showComment ? "open" : "closed"}
+                                            alt="Response Icon"
+                                        />
+                                        <p>Show comment {replies?.length}</p>
+                                    </button>
+
+                                )
+                        }
                     </motion.article>
                 </AnimatePresence>
             </div>
             {
                 showComment &&
                 (replies.map(reply => (
-                    <div className='cr-edit'>
-                        <CommentReponse key={reply?.id} date={reply?.date} name={reply?.name} img={reply?.img} comment={reply.comment} replies={reply?.replies} id={reply?.id} array={array} setArray={setArray} />
+                    <div key={reply?.id} className='cr-edit'>
+                        <CommentReponse date={reply?.date} name={reply?.name} img={reply?.img} comment={reply?.comment} replies={reply?.replies} id={reply?.id} array={array} setArray={setArray} />
                     </div>
                 )))
             }

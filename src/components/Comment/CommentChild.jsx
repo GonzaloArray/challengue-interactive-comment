@@ -46,7 +46,24 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
         setReply(false);
 
     };
-
+    const buttonVarian = {
+        hidden: {
+            x: '200%',
+            opacity: 0,
+        },
+        visible: {
+            x: '0',
+            opacity: 1,
+            type: 'spring'
+        },
+        hover: {
+            scale: 1.1,
+            transition: {
+                duration: 0.3,
+                delay: .1,
+            }
+        }
+    }
     return (
         <motion.section
             className='fcc-contenedor fcc-flex'
@@ -68,7 +85,15 @@ export const CommentChild = ({ name, id, array, setArray, setReply }) => {
                 >
 
                 </textarea>
-                <input className='fcc-submit' type="submit" value={'SEND'} />
+                <motion.input 
+                    className='fcc-submit' 
+                    type="submit" 
+                    value={'SEND'} 
+                    variants={buttonVarian}
+                    initial='hidden'
+                    animate='visible'
+                    whileHover='hover'
+                />
             </form>
         </motion.section>
     )

@@ -5,9 +5,16 @@ import { CommentReponse } from './CommentReponse';
 
 import './Comment.css'
 
-import svgImg from '../../assets/images/icon-reply.svg'
-import { motion } from 'framer-motion-3d';
+import svgImg from '../../assets/images/icon-reply.svg';
+import responseIcon from '../../assets/images/icon-response.svg';
 
+import { motion } from 'framer-motion';
+
+// Motion
+const variants = {
+    open: { rotate: 0 },
+    closed: { rotate: 180 }
+}
 
 export const Comment = ({ name, date, img, comment, id, array, setArray, replies }) => {
 
@@ -24,13 +31,13 @@ export const Comment = ({ name, date, img, comment, id, array, setArray, replies
 
     return (
         <section className='ic-all-flex'>
-            <motion.article 
+            <motion.article
                 className='ic-contenedor ic-flex ic-closed'
                 initial={{
                     opacity: 0,
                     y: '-100%'
                 }}
-                transition={{delay: .1, type: 'spring', stiffness: 100}}
+                transition={{ delay: .1, type: 'spring', stiffness: 100 }}
                 animate={{
                     opacity: [0, .5, 1],
                     y: 0
@@ -41,9 +48,9 @@ export const Comment = ({ name, date, img, comment, id, array, setArray, replies
                     <ButtonFollow follow={follow} setFollow={setFollow}>
                         +
                     </ButtonFollow>
-                    <motion.p 
+                    <motion.p
                         className='ics-state'
-                        
+
                     >
                         {follow}
                     </motion.p>
@@ -67,8 +74,23 @@ export const Comment = ({ name, date, img, comment, id, array, setArray, replies
                         <p className='icm-title'>{comment}</p>
                     </main>
                 </div>
-                <button className='icm-button' onClick={handleShowComment}>
-                    <p>Show comment {replies.length}</p>
+                <button
+                    type='button'
+                    className='icm-button icm-flex'
+                    onClick={handleShowComment}
+                >
+                    <motion.img
+                        src={responseIcon}
+                        className='icm-icon-img'
+                        variants={variants}
+                        initial={{ rotate: 180 }}
+                        animate={showComment ? "open" : "closed"}
+                        alt="Arrow comment"
+                    />
+                    {
+                        showComment &&
+                        (<p>Show comment {replies.length}</p>)
+                    }
                 </button>
             </motion.article>
             {

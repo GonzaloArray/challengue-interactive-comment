@@ -1,5 +1,24 @@
+import { motion } from 'framer-motion';
 import React, { useState } from 'react'
 
+const buttonVarian = {
+    hidden: {
+        x: '200%',
+        opacity: 0,
+    },
+    visible: {
+        x: '0',
+        opacity: 1,
+        type: 'spring'
+    },
+    hover: {
+        scale: 1.1,
+        transition: {
+            duration: 0.3,
+            delay: .1,
+        }
+    }
+}
 
 export const FormEdit = ({ comment, replies, setEdit, array, setArray, id }) => {
 
@@ -26,7 +45,7 @@ export const FormEdit = ({ comment, replies, setEdit, array, setArray, id }) => 
     const handleSubmit = (e) => {
         e.preventDefault();
         const updatedComments = editCommentRecursive(id, editComment, array);
-        
+
         setArray(updatedComments);
         setEdit(false);
     }
@@ -46,7 +65,15 @@ export const FormEdit = ({ comment, replies, setEdit, array, setArray, id }) => 
             >
 
             </textarea>
-            <input className='fcc-submit' type="submit" value={'UPDATE'} />
+            <motion.input
+                className='fcc-submit'
+                type="submit"
+                value={'UPDATE'}
+                variants={buttonVarian}
+                initial='hidden'
+                animate='visible'
+                whileHover='hover'
+            />
         </form>
     )
 }

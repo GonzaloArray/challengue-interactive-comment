@@ -1,8 +1,9 @@
+import { motion } from 'framer-motion';
 import React, { useState } from 'react'
 import './Comment.css'
 
 
-export const AddCommentParent = ({name, array, setArray}) => {
+export const AddCommentParent = ({ name, array, setArray }) => {
     const [changeName, setChangeName] = useState('');
 
     const handleChange = (e) => {
@@ -21,11 +22,29 @@ export const AddCommentParent = ({name, array, setArray}) => {
                 replies: [],
                 id: String.fromCharCode(Date.now()),
             }]);
-            
+
             setChangeName('')
         }
     };
 
+    const buttonVarian = {
+        hidden: {
+            x: '200%',
+            opacity: 0,
+        },
+        visible: {
+            x: '0',
+            opacity: 1,
+            type: 'spring'
+        },
+        hover: {
+            scale: 1.1,
+            transition: {
+                duration: 0.3,
+                delay: .1,
+            }
+        }
+    }
     return (
         <section className='fcc-contenedor fcc-flex'>
             <img className='ic-logo-img' src="https://unavatar.io/GonzaloArray" alt="Icono" />
@@ -37,9 +56,17 @@ export const AddCommentParent = ({name, array, setArray}) => {
                     value={changeName}
                     onChange={handleChange}
                 >
-                    
+
                 </textarea>
-                <input className='fcc-submit' type="submit" value={'SEND'} />
+                <motion.input
+                    className='fcc-submit'
+                    type="submit"
+                    value={'SEND'}
+                    variants={buttonVarian}
+                    initial='hidden'
+                    animate='visible'
+                    whileHover='hover'
+                />
             </form>
         </section>
     )
