@@ -218,6 +218,7 @@ p{
 }
 @media (min-width: 768px) {
     .cr-line{
+        display: block;
         padding: 0 2rem;
         transform: translateX(2rem);
     }
