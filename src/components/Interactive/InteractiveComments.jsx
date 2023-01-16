@@ -9,7 +9,7 @@ export const InteractiveComments = () => {
         {
             name: 'GonzaloArray',
             img: 'https://unavatar.io/GonzaloArray',
-            date: '1 month ago',
+            date: '1 year',
             comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
             id: '123123fasdfeq123123qdfdsf',
             replies: [
@@ -20,6 +20,14 @@ export const InteractiveComments = () => {
                     comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
                     id: 'asdfasdf2312312ddsafasdftghtujuik',
                     replies: []
+                },
+                {
+                    name: 'Messi',
+                    img: 'https://unavatar.io/messi',
+                    date: '9 weeks ago',
+                    comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
+                    id: 'asdfasdf2312312ddsafasdfas1213dftghtujuik',
+                    replies: []
                 }
             ]
         },
@@ -29,7 +37,16 @@ export const InteractiveComments = () => {
             date: '2 weeks ago',
             comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
             id: '123123fasdfeq123123qd13adsfasdf2312',
-            replies: []
+            replies: [
+                {
+                    name: 'Cristiano Ronaldo siuu',
+                    img: 'https://unavatar.io/cr7',
+                    date: '1 weeks ago',
+                    comment: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, beatae impedit distinctio in at voluptate fugiat odit itaque facilis molestias facere.',
+                    id: 'asdfasdf2312312ddsafasdfas1213dftghtujuik',
+                    replies: []
+                }
+            ]
         },
     ]);
 

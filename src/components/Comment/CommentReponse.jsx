@@ -25,16 +25,21 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
         setShowComment(!showComment);
     }
 
-    const handleDelete = () => {
-        const filterArray = array.map(comment => {
-            return {
-                ...comment,
-                replies: comment.replies.filter(reply => reply?.id !== id)
+    const deleteCommentRecursive = (id, comments) => {
+        return comments.filter(comment => {
+            if (comment.id === id) {
+                return false;
             }
-        })
+            if (comment.replies) {
+                comment.replies = deleteCommentRecursive(id, comment.replies);
+            }
+            return true;
+        });
+    }
 
-        setArray(filterArray)
-
+    const handleDelete = () => {
+        const updatedComments = deleteCommentRecursive(id, array);
+        setArray(updatedComments);
     }
 
     const handleEdit = () => {
@@ -124,20 +129,20 @@ export const CommentReponse = ({ name, date, img, comment, id, array, setArray, 
                         </div>
                         {
                             replies?.length > 0 &&
-                                (
-                                    <button className='icm-button icm-flex' onClick={handleShowComment}>
-                                        <motion.img
-                                            src={responseIcon}
-                                            className='icm-icon-img'
-                                            variants={variants}
-                                            initial={{ rotate: 180 }}
-                                            animate={showComment ? "open" : "closed"}
-                                            alt="Response Icon"
-                                        />
-                                        <p>Show comment {replies?.length}</p>
-                                    </button>
+                            (
+                                <button className='icm-button icm-flex' onClick={handleShowComment}>
+                                    <motion.img
+                                        src={responseIcon}
+                                        className='icm-icon-img'
+                                        variants={variants}
+                                        initial={{ rotate: 180 }}
+                                        animate={showComment ? "open" : "closed"}
+                                        alt="Response Icon"
+                                    />
+                                    <p>Show comment {replies?.length}</p>
+                                </button>
 
-                                )
+                            )
                         }
                     </motion.article>
                 </AnimatePresence>
