@@ -5,7 +5,7 @@ p{
     color: rgb(80, 80, 80);
 }
 .container{
-    max-width: min(100% - 15px, 650px);
+    width: min(100% - 2rem, 650px);
     margin-inline: auto;
     overflow-x: hidden;
 }
@@ -201,9 +201,6 @@ p{
 }
 
 /* Comment Child */
-.cr-edit{
-    display: none;
-}
 @media (min-width: 768px) {
     
     .cr-edit{
@@ -217,8 +214,13 @@ p{
     gap: .5px;
 }
 .cr-line{
-    padding: 0 2rem;
-    transform: translateX(2rem);
+    display: none;
+}
+@media (min-width: 768px) {
+    .cr-line{
+        padding: 0 2rem;
+        transform: translateX(2rem);
+    }
 }
 .cr-line::before{
     content: '';
